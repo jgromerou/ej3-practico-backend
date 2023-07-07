@@ -3,6 +3,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
+import './src/database/ConnectionDB';
 import coloresRouter from './src/routes/colores.routes';
 
 dotenv.config();
