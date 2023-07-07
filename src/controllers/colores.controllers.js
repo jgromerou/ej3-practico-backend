@@ -62,3 +62,46 @@ export const obtenerListaColores = async (req, res) => {
     });
   }
 };
+
+export const obtenerColor = async (req, res) => {
+  try {
+    //buscar en la BD un documento color mediante el id
+    const color = await Color.findById(req.params.id);
+    res.status(200).json(color);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error al intentar obtener el color',
+    });
+  }
+};
+
+export const borrarColor = async (req, res) => {
+  try {
+    //buscar en la BD un documento color mediante el id y borrarlo
+    await Color.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      mensaje: 'El color fue borrado correctamente.',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error, no se pudo borrar el color.',
+    });
+  }
+};
+
+export const editarColor = async (req, res) => {
+  try {
+    //buscar en la BD un documento color mediante el id y editarlo
+    await Color.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      mensaje: 'El color fue editado correctamente.',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error, no se pudo editar el color.',
+    });
+  }
+};

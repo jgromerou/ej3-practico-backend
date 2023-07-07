@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import {
+  borrarColor,
   controladorTest,
   crearColor,
+  editarColor,
+  obtenerColor,
   obtenerListaColores,
 } from '../controllers/colores.controllers';
 import { check } from 'express-validator';
@@ -71,5 +74,10 @@ router
     crearColor
   )
   .get(obtenerListaColores);
+router
+  .route('/colores/:id')
+  .get(obtenerColor)
+  .delete(borrarColor)
+  .put(editarColor);
 
 export default router;
