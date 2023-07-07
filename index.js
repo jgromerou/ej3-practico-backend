@@ -3,6 +3,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
+import coloresRouter from './src/routes/colores.routes';
 
 dotenv.config();
 
@@ -26,6 +27,4 @@ app.use(morgan('dev')); //me da info extra en la terminal
 app.use(express.static(path.join(__dirname, '/public')));
 
 //rutas
-app.get('/prueba', (req, res) => {
-  res.send('Esta es una prueba de mi ruta GET de prueba');
-});
+app.use('/apicolores', coloresRouter);
