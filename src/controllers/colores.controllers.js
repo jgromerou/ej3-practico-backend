@@ -45,7 +45,20 @@ export const crearColor = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({
-      message: 'Error al intentar crear una tarea',
+      message: 'Error al intentar crear un color',
+    });
+  }
+};
+
+export const obtenerListaColores = async (req, res) => {
+  try {
+    //buscar en la BD la collection de colores
+    const colores = await Color.find();
+    res.status(200).json(colores);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: 'Error al intentar listar los colores',
     });
   }
 };
