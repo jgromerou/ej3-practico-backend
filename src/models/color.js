@@ -10,13 +10,11 @@ const colorSchema = new Schema({
   },
   codigoHexadecimal: {
     type: String,
-    unique: true,
     maxLength: 10,
   },
-  colorRGB: {
+  codigoRGB: {
     type: String,
-    unique: true,
-    maxLength: 20,
+    maxLength: 16,
   },
 });
 
