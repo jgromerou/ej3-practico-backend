@@ -93,6 +93,16 @@ export const borrarColor = async (req, res) => {
 
 export const editarColor = async (req, res) => {
   try {
+    //trabajar con los resultados de la validación
+    const errors = validationResult(req);
+
+    //errors.isEmpty(); true: si está vacío, es false tiene errores
+    //quiero saber si hay errores
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
     //buscar en la BD un documento color mediante el id y editarlo
     await Color.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
