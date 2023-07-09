@@ -22,7 +22,7 @@ export const crearColor = async (req, res) => {
 
     //verificar si el color ya existe
     let color = await Color.findOne({
-      nombreColor: { $regex: nombreColor, $options: 'i' },
+      nombreColor,
     }); //devuelve un null
     console.log(color);
     if (color) {
@@ -106,7 +106,7 @@ export const editarColor = async (req, res) => {
     const { nombreColor } = req.body;
     //verificar si el color ya existe
     let color = await Color.findOne({
-      nombreColor: { $regex: nombreColor, $options: 'i' },
+      nombreColor,
     }); //devuelve un null
     console.log(color);
     if (color) {
