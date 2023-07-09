@@ -103,6 +103,18 @@ export const editarColor = async (req, res) => {
         errors: errors.array(),
       });
     }
+    const { nombreColor } = req.body;
+    //verificar si el color ya existe
+    let color = await Color.findOne({
+      nombreColor: { $regex: nombreColor, $options: 'i' },
+    }); //devuelve un null
+    console.log(color);
+    if (color) {
+      //si el color existe
+      return res.status(400).json({
+        mensaje: 'ya existe una color con el correo enviado',
+      });
+    }
     //buscar en la BD un documento color mediante el id y editarlo
     await Color.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
