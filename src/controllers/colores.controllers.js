@@ -28,7 +28,7 @@ export const crearColor = async (req, res) => {
     if (color) {
       //si el color existe
       return res.status(400).json({
-        mensaje: 'ya existe una color con el correo enviado',
+        mensaje: 'ya existe un color con el correo enviado',
       });
     }
 
@@ -112,7 +112,7 @@ export const editarColor = async (req, res) => {
     if (color) {
       //si el color existe
       return res.status(400).json({
-        mensaje: 'ya existe una color con el correo enviado',
+        mensaje: `El color ${color.nombreColor} ya existe. Intente con otro.`,
       });
     }
     //buscar en la BD un documento color mediante el id y editarlo
