@@ -1,10 +1,6 @@
 import { validationResult } from 'express-validator';
 import Color from '../models/color';
 
-export const controladorTest = (req, res) => {
-  res.send('Este es un test de mi ruta GET de raíz');
-};
-
 export const crearColor = async (req, res) => {
   try {
     const errors = validationResult(req);
