@@ -103,18 +103,7 @@ export const editarColor = async (req, res) => {
         errors: errors.array(),
       });
     }
-    const { nombreColor } = req.body;
-    //verificar si el color ya existe
-    let color = await Color.findOne({
-      nombreColor,
-    }); //devuelve un null
-    console.log(color);
-    if (color) {
-      //si el color existe
-      return res.status(400).json({
-        mensaje: `El color ${color.nombreColor} ya existe. Intente con otro.`,
-      });
-    }
+
     //buscar en la BD un documento color mediante el id y editarlo
     await Color.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
@@ -123,7 +112,7 @@ export const editarColor = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({
-      mensaje: 'Error, no se pudo editar el color.',
+      mensaje: 'Error, no se pudo editar el color',
     });
   }
 };
