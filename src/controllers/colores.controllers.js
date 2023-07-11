@@ -7,32 +7,21 @@ export const controladorTest = (req, res) => {
 
 export const crearColor = async (req, res) => {
   try {
-    //trabajar con los resultados de la validación
     const errors = validationResult(req);
-
-    //errors.isEmpty(); true: si está vacío, es false tiene errores
-    //quiero saber si hay errores
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
       });
     }
-
     const { nombreColor } = req.body;
-
-    //verificar si el color ya existe
     let color = await Color.findOne({
       nombreColor,
-    }); //devuelve un null
-    console.log(color);
+    });
     if (color) {
-      //si el color existe
       return res.status(400).json({
         mensaje: 'ya existe un color con el correo enviado',
       });
     }
-
-    //guardamos el nuevo color en la BD
     color = new Color(req.body);
     await color.save();
     res.status(201).json({
@@ -52,7 +41,6 @@ export const crearColor = async (req, res) => {
 
 export const obtenerListaColores = async (req, res) => {
   try {
-    //buscar en la BD la collection de colores
     const colores = await Color.find();
     res.status(200).json(colores);
   } catch (error) {
@@ -65,7 +53,6 @@ export const obtenerListaColores = async (req, res) => {
 
 export const obtenerColor = async (req, res) => {
   try {
-    //buscar en la BD un documento color mediante el id
     const color = await Color.findById(req.params.id);
     res.status(200).json(color);
   } catch (error) {
@@ -78,7 +65,6 @@ export const obtenerColor = async (req, res) => {
 
 export const borrarColor = async (req, res) => {
   try {
-    //buscar en la BD un documento color mediante el id y borrarlo
     await Color.findByIdAndDelete(req.params.id);
     res.status(200).json({
       mensaje: 'El color fue borrado correctamente.',
@@ -93,18 +79,12 @@ export const borrarColor = async (req, res) => {
 
 export const editarColor = async (req, res) => {
   try {
-    //trabajar con los resultados de la validación
     const errors = validationResult(req);
-
-    //errors.isEmpty(); true: si está vacío, es false tiene errores
-    //quiero saber si hay errores
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
       });
     }
-
-    //buscar en la BD un documento color mediante el id y editarlo
     await Color.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
       mensaje: 'El color fue editado correctamente.',
